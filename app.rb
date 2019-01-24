@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require './lib/player'
+require './lib/game'
 # require 'shotgun'
 # set :session_secret, 'super secret'
 
@@ -16,7 +17,7 @@ class Battle < Sinatra::Base
     # session[:player_2_name] = params[:player_two]
     $player_1_name = Player.new(params[:player_one])
     $player_2_name = Player.new(params[:player_two])
-
+    $game = Game.new($player_1_name)
     # session[:player_1_health] = 100
     # session[:player_2_health] = 100
     # @player_1_health = $player_1_name.health
@@ -35,7 +36,8 @@ class Battle < Sinatra::Base
   get '/attack' do
     @player_1 = $player_1_name.name
     @player_2 = $player_2_name.name
-    @player_2_health = $player_1_name.attack($player_2_name)
+    @player_2_health = $game.attack($player_2_name)
+    # @player_2_health = $player_1_name.attack($player_2_name)
     erb(:attack)
   end
 
