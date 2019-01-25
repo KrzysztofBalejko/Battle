@@ -15,9 +15,11 @@ class Battle < Sinatra::Base
   post '/names' do
     # session[:player_1_name] = params[:player_one]
     # session[:player_2_name] = params[:player_two]
-    $player_1_name = Player.new(params[:player_one])
-    $player_2_name = Player.new(params[:player_two])
-    $game = Game.new($player_1_name)
+    # $player_1_name = Player.new(params[:player_one])
+    # $player_2_name = Player.new(params[:player_two])
+    # $game = Game.new($player_1_name, $player_2_name )
+    $game = Game.new($player_1_name = Player.new(params[:player_one]), $player_2_name = Player.new(params[:player_two]))
+
     # session[:player_1_health] = 100
     # session[:player_2_health] = 100
     # @player_1_health = $player_1_name.health
